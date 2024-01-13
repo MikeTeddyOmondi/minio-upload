@@ -14,7 +14,7 @@ const BUCKET_NAME = String("photos")
 
 // Instantiate the minio client with
 // the endpoint and access keys
-var minioClient = new Client({
+const minioClient = new Client({
     endPoint: MINIO_API_HOST,
     port: 9000,
     useSSL: false,
@@ -23,7 +23,7 @@ var minioClient = new Client({
 })
 
 // File that needs to be uploaded.
-var file = './javascript.png'
+const file = "./images/javascript.png";
 
 minioClient.bucketExists('photos', function (err, exists) {
     if (err) {
@@ -48,7 +48,13 @@ let metaData = {
 }
 
 // Using fPutObject API upload your file to the bucket europetrip.
-minioClient.fPutObject('photos', 'javascript.png', file, metaData, function (err, etag) {
-    if (err) return console.log(err)
-    console.log('File uploaded successfully!')
-})
+minioClient.fPutObject(
+  BUCKET_NAME,
+  "javascript.png",
+  file,
+  metaData,
+  function (err, etag) {
+    if (err) return console.log(err);
+    console.log("File uploaded successfully!");
+  }
+);
